@@ -46,4 +46,5 @@
 
 	// Build page
 	$lang_build['title'] = array(0 => "Building your Package file",1 => "Construction de votre ficier Package");
-	$lang_build['corrupted_informations'] = array(0 => "Note : Some informations of the control file from //PACKAGE// are corrupted. This package will be ignored",1 => "Note : Certaines informations du fichier de contrôle de //PACKAGE// sont corrompues. Ce fichier va être ignoré.");
+	$lang_build['corrupted_informations'] = array(0 => "Some informations of the control file from //PACKAGE// are corrupted. This package will be ignored",1 => "Certaines informations du fichier de contrôle de //PACKAGE// sont corrompues. Ce fichier va être ignoré.");
+	$lang_build['missing_control.tar.gz'] = array(0 => "The \"control\" file is missing on //PACKAGE//.", 1 => "Le fichier \"control\" est manquant sur //PACKAGE//.");
