@@ -21,10 +21,10 @@
 				<h6 class="underline">Dumb Cydia Repository Manager</h6>
 			</div>
 			<div class="span6">
-				<div class="btn-group" id="build">
+				<div class="btn-group pull-right">
 					<a href="build.php" class="btn btn-inverse"><?php echo $lang_topbtn['build'][DCRM_LANG]; ?> !</a>
 					<a href="settings.php" class="btn btn-info"><?php echo $lang_topbtn['settings'][DCRM_LANG]; ?></a>
-					<a href="login.php?action=logout" class="btn btn-info"><?php echo $lang_topbtn['logout'][DCRM_LANG]; ?></a>
+					<a href="login.php?action=logout&token=<?php echo $_SESSION['token']; ?>" class="btn btn-info"><?php echo $lang_topbtn['logout'][DCRM_LANG]; ?></a>
 				</div>
 			</div>
 		</div>

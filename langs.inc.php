@@ -46,3 +46,4 @@
 
 	// Build page
 	$lang_build['title'] = array(0 => "Building your Package file",1 => "Construction de votre ficier Package");
+	$lang_build['corrupted_informations'] = array(0 => "Note : Some informations of the control file from //PACKAGE// are corrupted. This package will be ignored",1 => "Note : Certaines informations du fichier de contrôle de //PACKAGE// sont corrompues. Ce fichier va être ignoré.");

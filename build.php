@@ -21,10 +21,10 @@
 				<h6 class="underline">Dumb Cydia Repository Manager</h6>
 			</div>
 			<div class="span6">
-				<div class="btn-group" id="build">
+				<div class="btn-group pull-right">
 					<a href="#" class="btn btn-inverse disabled"><?php echo $lang_topbtn['build'][DCRM_LANG]; ?> !</a>
 					<a href="settings.php" class="btn btn-info"><?php echo $lang_topbtn['settings'][DCRM_LANG]; ?></a>
-					<a href="login.php?action=logout" class="btn btn-info"><?php echo $lang_topbtn['logout'][DCRM_LANG]; ?></a>
+					<a href="login.php?action=logout&token=<?php echo $_SESSION['token']; ?>" class="btn btn-info"><?php echo $lang_topbtn['logout'][DCRM_LANG]; ?></a>
 				</div>
 			</div>
 		</div>
@@ -69,9 +69,22 @@
 										$package[preg_replace("#^(.+): (.+)#","$1", $line)] = preg_replace("#^(.+): (.+)#","$2", $line);
 									}
 								}
-								print_r($package);
+								if ((!empty($package['MD5Sum']) AND $package['MD5Sum'] != md5_file("deb/".$file)) OR (!empty($package['Size']) AND $package['Size'] != filesize("deb/".$file))) {
+									
+									$error_log .= str_replace("//PACKAGE//",$file,$lang_build['corrupted_informations'][DCRM_LANG])."\n";
+								}
+								else {
+									if (empty($package['MD5Sum'])) {
+										$package['MD5Sum'] = md5_file("deb/".$file);
+									}
+									if (empty($package['Size'])) {
+										$package['Size'] = filesize("deb/".$file);
+									}
+									foreach ($package as $field => $content) {
+										$package_list .= $field.": ".$content."\n";
+									}
+								}
 								$package_list .= "\n";
-								unset($md5);
 							}
 							if (file_exists("Packages")) {
 								unlink("Packages");
@@ -88,6 +101,14 @@
 						}
 					}
 				?>
+				<div class="wrapper">
+					<div class="item">
+						<?php
+							if (!empty($error_log)) {echo $error_log;}
+							else {echo }
+						?>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -528,4 +528,5 @@ body {padding-top: 40px;padding-bottom: 40px;}
 .title {font-size: 71.5px !important;margin-bottom: 15px;color: #009ACD;}
 .underline {color: #000000;padding-left: 5px;}
 #logo {padding: 0 !important;margin-left: 0 !important;}
-#build {float: right;}
+.wrapper{}
+.wrapper>.item {}

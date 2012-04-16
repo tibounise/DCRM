@@ -1,2 +1,26 @@
+Package: com.TiBounise.PoopBreaker
+Name: PoopBreaker
+Version: 1.0
+Architecture: iphoneos-arm
+Description: A simple brick-breaker.
+Homepage: http://tibounise.com
+Depiction: http://tibounise.com
+Maintainer: TiBounise <contact@tibounise.com>
+Author: TiBounise <contact@tibounise.com>
+Section: Games
+MD5Sum: 911b94ae526e739f050e1234bbc66d6e
+Size: 261560
 
+Package: com.repo.tibounise.com.LoKanizer
+Name: LoKanizer
+Version: 1.0
+Architecture: iphoneos-arm
+Description: Simple sampler
+Homepage: http://tibounise.com
+Depiction: http://repo.tibounise.com/debs/com.repo.tibounise.com.LoKanizer/files/index.html
+Maintainer: TiBounise Software
+Author: TiBounise
+Section: Emulation
+MD5Sum: 58208847b6dd3b4a362d0de4e90b6652
+Size: 3212088
 
