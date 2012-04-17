@@ -48,3 +48,11 @@
 	$lang_build['title'] = array(0 => "Building your Package file",1 => "Construction de votre ficier Package");
 	$lang_build['corrupted_informations'] = array(0 => "Some informations of the control file from //PACKAGE// are corrupted. This package will be ignored",1 => "Certaines informations du fichier de contrôle de //PACKAGE// sont corrompues. Ce fichier va être ignoré.");
 	$lang_build['missing_control.tar.gz'] = array(0 => "The \"control\" file is missing on //PACKAGE//.", 1 => "Le fichier \"control\" est manquant sur //PACKAGE//.");
+	$lang_build['no_error'] = array(0 => "No error found \o/", 1 => "Aucun erreur trouvée \o/");
+	$lang_build['conclusion'] = array(0 => "Your packages file has been built with //ERRORS// error(s).", 1 => "Votre fichier packages a bien été construit avec //ERRORS// erreur(s).");
+
+	// Release page
+	$lang_release['title'] = array(0 => "Settings of the repository",1 => "Paramètres de la source");
+	$lang_release['save'] = array(0 => "Save",1 => "Sauvegarder");
+	$lang_release['origin'] = array(0 => "Name of the repository",1 => "Nom de la source");
+	$lang_release['origin_help'] = array(0 => "This will appear as ",1 => "Nom de la source");

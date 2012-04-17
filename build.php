@@ -13,6 +13,9 @@
 			if (!empty($file) AND file_exists($file)) {
 				$this->file = $file;
 			}
+			else {
+				echo "File opening failed.";
+			}
 		}
 		function listfiles() {
 			$handle = fopen($this->file,"rb");
@@ -127,25 +130,23 @@
 							$error_log = "";
 							foreach ($files as $file) {
 								$package = "";
-								$deb_seems_good = false; // Just to check if we have the control file
 								if (!is_dir("tmp")) {
 									mkdir("tmp");
 								}
 								elseif (file_exists("tmp/control.tar.gz")) {
 								 	unlink("tmp/control.tar.gz");
 								}
-								$debfile = new phpAr($file);
-								$filesin_debfile = $debfile->listfiles();
-								foreach ($filesin_debfile as $filein_debfile) {
-									if ($filein_debfile == "control.tar.gz") {
-										$deb_seems_good = true;
-									}
-								}
-								if ($deb_seems_good) {
-									
+								$debfile = new phpAr("deb/".$file);
+								$control_file = $debfile->getfile('control.tar.gz');
+								if ($control_file != false) {
+									$control_handle = fopen("tmp/control.tar.gz", "w");
+									fputs($control_handle,$control_file[0][6]);
+									fclose($control_handle);
+									$filexec = gzfile("tmp/control.tar.gz");
 									foreach ($filexec as $line) {
+										$line = trim($line);
 										if(preg_match("#^Package|Source|Version|Priority|Section|Essential|Maintainer|Pre-Depends|Depends|Recommends|Suggests|Conflicts|Provides|Replaces|Enhances|Architecture|Filename|Size|Installed-Size|Description|Origin|Bugs|Name|Author|Homepage|Website|Depiction|Icon#", $line)) {
-											$package[preg_replace("#^(.+): (.+)#","$1", $line)] = preg_replace("#^(.+): (.+)#","$2", $line);
+											$package[trim(preg_replace("#^(.+): (.+)#","$1", $line))] = trim(preg_replace("#^(.+): (.+)#","$2", $line));
 										}
 									}
 									if ((!empty($package['MD5Sum']) AND $package['MD5Sum'] != md5_file("deb/".$file)) OR (!empty($package['Size']) AND $package['Size'] != filesize("deb/".$file))) {
@@ -185,16 +186,42 @@
 					}
 				?>
 				<div class="wrapper">
-					<div class="item">
+					<ul class="breadcrumb"><i class="icon" id="triangle_errors" onclick="wrapper('triangle_errors','item_errors'); return false;">&#9658;</i>&nbsp;Errors</ul>
+					<div class="item" style="display:none;" id="item_errors">
 						<?php
-							if (!empty($error_log)) {echo $error_log;}
-							else {echo }
+							if (!empty($error_log)) {echo nl2br($error_log);}
+							else {echo $lang_build['no_error'][DCRM_LANG];}
 						?>
 					</div>
+					<ul class="breadcrumb" onclick="return false;"><i class="icon" id="triangle_packages" onclick="wrapper('triangle_packages','item_packages'); return false;">&#9658;</i>&nbsp;Packages file</ul>
+					<div class="item" style="display:none;" id="item_packages">
+						<?php echo nl2br($package_list); ?>
+					</div>
 				</div>
+				<h3><?php echo str_replace("//ERRORS//", substr_count($error_log, "\n"), $lang_build['conclusion'][DCRM_LANG]) ?></h3>
 			</div>
 		</div>
 	</div>
+	<script>
+		function wrapper(triangleitem, item) {
+			var triangle = document.getElementById(triangleitem);
+			var elementitem = document.getElementById(item);
+			if (elementitem.style.display == "none") {
+				triangle.style.mozTransform = "rotate(90deg)";
+				triangle.style.webkitTransform = "rotate(90deg)";
+				triangle.style.oTransform = "rotate(90deg)";
+				triangle.style.transform = "rotate(90deg)";
+				elementitem.style.display = "block";
+			}
+			else {
+				elementitem.style.display = "none";
+				triangle.style.mozTransform = "rotate(0deg)";
+				triangle.style.webkitTransform = "rotate(0deg)";
+				triangle.style.oTransform = "rotate(0deg)";
+				triangle.style.transform = "rotate(0deg)";
+			}
+		}
+	</script>
 </body>
 </html>
 <?php

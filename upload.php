@@ -66,20 +66,7 @@
 				<?php
 					}
 					elseif ($_GET['action'] == "upload" AND !empty($_FILES)) {
-						$deb = $_FILES['deb'];
-						$ext = strtolower(pathinfo($_FILES['deb']['name'],PATHINFO_EXTENSION));
-						if (preg_match("#^deb$#", $ext) AND !file_exists("deb/".$deb['name'])) {
-							move_uploaded_file($deb['tmp_name'], "deb/".$deb['name'])
-				?>
-					<h2><?php echo $lang_upload['upload_successfull'][DCRM_LANG]; ?></h2>
-				<?php
-						}
-						else {
-				?>
-					<h2><?php echo $lang_upload['upload_unsuccessfull'][DCRM_LANG]; ?></h2>
-					<p><?php echo $lang_upload['upload_unsuccessfull_reason'][DCRM_LANG]; ?></p>
-				<?php
-						}
+						
 					}
 				?>
 			</div>
