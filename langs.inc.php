@@ -3,6 +3,8 @@
 		exit;
 	}
 
+	$langs = array(0 => "English",1 => "Français");
+
 	// Sidebar
 	$lang_sidebar['packages'] = array(0 => 'Packages',1 => 'Paquets');
 		$lang_sidebar['add_package'] = array(0 => 'Add a package',1 => 'Ajouter un paquet');
@@ -55,4 +57,16 @@
 	$lang_release['title'] = array(0 => "Settings of the repository",1 => "Paramètres de la source");
 	$lang_release['save'] = array(0 => "Save",1 => "Sauvegarder");
 	$lang_release['origin'] = array(0 => "Name of the repository",1 => "Nom de la source");
-	$lang_release['origin_help'] = array(0 => "This will appear as ",1 => "Nom de la source");
+	$lang_release['origin_help'] = array(0 => "This is used by Cydia as the name of the repository as shown in the source editor.",1 => "Ceci est utilisé par Cydia en tant que nom de la source dans l'éditeur des sources.");
+	$lang_release['label'] = array(0 => "Name of the repository (short)",1 => "Nom de la source (court)");
+	$lang_release['label_help'] = array(0 => "This will be shown on the packages list.",1 => "Ceci va être affiché sur la liste des paquets.");
+	$lang_release['suite'] = array(0 => "Branch of the repository",1 => "Branche de la source");
+	$lang_release['codename'] = array(0 => "Codename",1 => "Nom de code");
+	$lang_release['changes_applied'] = array(0 => "Your changes has been applied",1 => "Vos changements ont bien été appliqués");
+
+	// Settings page
+	$lang_settings['username'] = array(0 => "Username",1 => "Nom d'utilisateur");
+	$lang_settings['password'] = array(0 => "Password",1 => "Mot de passe");
+	$lang_settings['trials'] = array(0 => "Number of trials of login",1 => "Nombre de tentatives de connexion");
+	$lang_settings['language'] = array(0 => "Language",1 => "Langage");
+	$lang_settings['change_password'] = array(0 => "Let this field empty if you don't want to change your password",1 => "Laissez ce champ vide si vous ne voulez pas changer de mot de passe");
