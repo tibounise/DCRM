@@ -59,7 +59,7 @@
 						<div class="group-control">
 							<label class="control-label"><?php echo $lang_settings['password'][DCRM_LANG]; ?></label>
 							<div class="controls">
-								<input type="text" name="password"/>
+								<input type="password" name="password"/>
 								<p class="help-block"><?php echo $lang_settings['change_password'][DCRM_LANG]; ?></p>
 							</div>
 						</div>
@@ -89,6 +89,32 @@
 							</div>
 						</div>
 						<br>
+						<div class="group-control">
+							<label class="control-label"><?php echo $lang_settings['list_packages'][DCRM_LANG] ?></label>
+							<div class="controls">
+								<select name="list">
+									<?php
+										$option = array(0 => array(0 => "No", 1 => "Non"),1 => array(0 => "Yes", 1 => "Oui"));
+										foreach ($option as $option_id => $option_value) {
+											if ($option_id == DCRM_SHOWLIST) {
+												echo "<option value=\"".$option_id."\" selected=\"selected\">".$option_value[DCRM_LANG]."</option>";
+											}
+											else {
+												echo "<option value=\"".$option_id."\">".$option_value[DCRM_LANG]."</option>";
+											}
+										}
+									?>
+								</select>
+							</div>
+						</div>
+						<br>
+						<div class="group-control">
+							<label class="control-label"><?php echo $lang_settings['url_repo'][DCRM_LANG]; ?></label>
+							<div class="controls">
+								<input type="text" required="required" name="url_repo" value="<?php echo base64_decode(DCRM_REPOURL); ?>"/>
+							</div>
+						</div>
+						<br>
 						<div class="form-actions">
 							<div class="controls">
 								<button type="submit" class="btn btn-success"><?php echo $lang_release['save'][DCRM_LANG]; ?></button>
@@ -107,8 +133,10 @@
 						else {
 							$config_text .= "\tdefine(\"DCRM_PASSWORD\",\"".DCRM_PASSWORD."\");\n";
 						}
-						$config_text .= "\tdefine(\"DCRM_MAXLOGINFAIL\",\"".$_POST['trials']."\");\n";
-						$config_text .= "\tdefine(\"DCRM_LANG\",\"".$_POST['lang']."\");\n";
+						$config_text .= "\tdefine(\"DCRM_MAXLOGINFAIL\",".$_POST['trials'].");\n";
+						$config_text .= "\tdefine(\"DCRM_LANG\",".$_POST['lang'].");\n";
+						$config_text .= "\tdefine(\"DCRM_SHOWLIST\",".$_POST['list'].");\n";
+						$config_text .= "\tdefine(\"DCRM_REPOURL\",\"".base64_encode($_POST['url_repo'])."\");\n";
 						$config_handle = fopen("config.inc.php", "w");
 						fputs($config_handle,stripslashes($config_text));
 						fclose($config_handle);

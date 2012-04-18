@@ -70,3 +70,8 @@
 	$lang_settings['trials'] = array(0 => "Number of trials of login",1 => "Nombre de tentatives de connexion");
 	$lang_settings['language'] = array(0 => "Language",1 => "Langage");
 	$lang_settings['change_password'] = array(0 => "Let this field empty if you don't want to change your password",1 => "Laissez ce champ vide si vous ne voulez pas changer de mot de passe");
+	$lang_settings['list_packages'] = array(0 => "List the packages on the homepage", 1 => "Lister les paquets sur la page d'accueil");
+
+	// Homepage
+	$lang_homepage['pleaseadd'] = array(0 => "You can add this repository by entering //URL// into Cydia.", 1 => "Vous pouvez ajouter cette source en entrant //URL// dans Cydia.");
+	$lang_homepage['package'] = array(0 => "Package",1 => "Paquet");

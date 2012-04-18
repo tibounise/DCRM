@@ -14,7 +14,7 @@
 	}
 
 	elseif (isset($_SESSION['connected'])) {
-		header("Location: index.php");
+		header("Location: manage.php");
 	} 
 
 	elseif (!empty($_POST['username']) AND !empty($_POST['password'])) {
@@ -22,7 +22,7 @@
 			$_SESSION['connected'] = true;
 			$_SESSION['token'] = sha1(time()*rand(140,320));
 			$_SESSION['try'] = 0;
-			header("Location: index.php");
+			header("Location: manage.php");
 		}
 		else {
 			$_SESSION['try'] = $_SESSION['try'] + 1;
@@ -41,38 +41,27 @@
 	<html>
 		<head>
 			<title>DCRM - Login</title>
+			<link rel="stylesheet" href="bootstrap.min.css">
+			<meta charset="utf-8">
 			<style type="text/css" media="screen">
 				body {
 					margin: 100px;
-					background-color: #CCC;
+					background: #ffffff;
+					background: -moz-radial-gradient(center, ellipse cover, #ffffff 0%, #e5e5e5 100%);
+					background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5));
+					background: -webkit-radial-gradient(center, ellipse cover, #ffffff 0%,#e5e5e5 100%);
+					background: -o-radial-gradient(center, ellipse cover, #ffffff 0%,#e5e5e5 100%);
+					background: -ms-radial-gradient(center, ellipse cover, #ffffff 0%,#e5e5e5 100%);
+					background: radial-gradient(center, ellipse cover, #ffffff 0%,#e5e5e5 100%);
+					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=1 );
 					font-family: Arial,Helvetica,sans-serif;
 					font-size: 10pt;
 				}
-				#form {
-					-webkit-border-bottom-left-radius: 25px;
-					-moz-border-radius-bottomleft: 25px;
-					border-bottom-left-radius: 25px;
-					background-color: #507e8c;
-					padding: 50px;
-					width: 320px;
+				.well {
+					margin-left: auto;
+					margin-right: auto;
+					width: 400px;
 					text-align: center;
-					margin: auto;
-				}
-				#form p {
-					color: white;
-				}
-				#caption {
-					-webkit-border-top-right-radius: 25px;
-					-moz-border-radius-topright: 25px;
-					border-top-right-radius: 25px;
-					width: 418px;
-					text-align: center;
-					margin: auto;
-					padding: 1px;
-					background-color: #EEE;
-				}
-				.error {
-					color: red;
 				}
 			</style>
 		</head>
@@ -80,8 +69,7 @@
 			<?php
 				if (!isset($_SESSION['try']) OR $_SESSION['try'] <= DCRM_MAXLOGINFAIL) {
 			?>
-			<div id="caption">
-			<p>
+			<form class="well" action="login.php" method="POST">
 				<?php
 					if (isset($_GET['error']) AND $_GET["error"] == "notenough") {
 						echo $lang_login['not_enough'][DCRM_LANG];
@@ -96,21 +84,19 @@
 						echo $lang_login['login_message'][DCRM_LANG];
 					}
 				?>
-			</p>
-			</div>
-			<form action="login.php" method="POST">
-				<div id="form">
-					<p><?php echo $lang_login['username'][DCRM_LANG]; ?> : <input type="text" name="username" /></p>
-					<p><?php echo $lang_login['password'][DCRM_LANG]; ?> : <input type="password" name="password" /></p>
-					<input type="submit" name="submit" value="<?php echo $lang_login['login'][DCRM_LANG]; ?> !" />
-				</div>
+				<hr>
+				<p><input type="text" name="username" required="required" placeholder="<?php echo $lang_login['username'][DCRM_LANG]; ?>" /></p>
+				<p><input type="password" name="password" placeholder="<?php echo $lang_login['password'][DCRM_LANG]; ?> " required="required" /></p>
+					<input type="submit" class="btn btn-success" name="submit" value="<?php echo $lang_login['login'][DCRM_LANG]; ?> !" />
 			</form>
 			<?php
 				}
 				else {
 			?>
-			<div id="caption" class="error"><p><?php echo $lang_login['error'][DCRM_LANG]; ?></p></div>
-			<div id="form"><p class="alert"><?php echo $lang_login['too_much'][DCRM_LANG]; ?>.</p></form>
+			<div class="well">
+				<?php echo $lang_login['error'][DCRM_LANG]; ?><hr>
+				<?php echo $lang_login['too_much'][DCRM_LANG]; ?>.
+			</div>
 			<?php
 				}
 			?>
